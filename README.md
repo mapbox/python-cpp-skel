@@ -1,7 +1,9 @@
 python_cpp_skel
 ===============
 
-An example project built with [pybind11](https://github.com/pybind/pybind11).
+A python skeleton project built with [pybind11](https://github.com/pybind/pybind11) and [mason](https://github.com/mapbox/mason/).
+
+[![Build Status](https://travis-ci.org/mapbox/python-cpp-skel.svg?branch=master)](https://travis-ci.org/mapbox/python-cpp-skel)
 
 Installation
 ------------

@@ -8,6 +8,9 @@ addons:
     sources: [ 'ubuntu-toolchain-r-test' ]
     packages: [ 'libstdc++-4.9-dev' ]
 
+before_install:
+  - pip install --upgrade pip
+
 install:
   - python -V
   - which python
