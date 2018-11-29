@@ -1,5 +1,6 @@
 language: python
 sudo: false
+dist: xenial
 
 # enable c++11/14 builds
 addons:
@@ -54,14 +55,6 @@ matrix:
     - os: linux
       env: BUILDTYPE=debug
       python: 3.6
-    # linux python 3.5
-    - os: linux
-      env: BUILDTYPE=release
-      python: 3.5
-    # linux python 3.5 - debug
-    - os: linux
-      env: BUILDTYPE=debug
-      python: 3.5
     # linux python 2.7
     - os: linux
       env: BUILDTYPE=release
@@ -86,14 +79,6 @@ matrix:
     - os: osx
       env: BUILDTYPE=debug
       python: 3.6
-    # osx python 3.5
-    - os: osx
-      env: BUILDTYPE=release
-      python: 3.5
-    # osx python 3.5 - debug
-    - os: osx
-      env: BUILDTYPE=debug
-      python: 3.5
     # osx python 2.7
     - os: osx
       env: BUILDTYPE=release
