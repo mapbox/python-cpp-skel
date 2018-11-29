@@ -1,0 +1,114 @@
+language: node_js
+
+sudo: false
+
+# enable c++11/14 builds
+addons:
+  apt:
+    sources: [ 'ubuntu-toolchain-r-test' ]
+    packages: [ 'libstdc++-4.9-dev' ]
+
+install:
+  - python -V
+  - which python
+  - |
+    if [ "$BUILDTYPE" = "release" ]; then
+      pip install pytest
+      python setup.py sdist
+      pip install --verbose dist/*.tar.gz
+    else
+      pip install pytest
+      pip install pybind11
+      python setup.py develop --debug
+    fi
+
+script:
+  - pytest
+
+# the matrix allows you to specify different operating systems and environments to
+# run your tests and build binaries
+matrix:
+  include:
+
+    ## ** Builds that are published **
+
+    # linux cfi build python 3.7
+    - os: linux
+      env: BUILDTYPE=release CXXFLAGS="-fsanitize=cfi -fvisibility=hidden" LDFLAGS="-fsanitize=cfi"
+      python: 3.7
+    # linux python 3.7
+    - os: linux
+      env: BUILDTYPE=release
+      python: 3.7
+    # linux python 3.7 - debug
+    - os: linux
+      env: BUILDTYPE=debug
+      python: 3.7
+    # linux python 3.6
+    - os: linux
+      env: BUILDTYPE=release
+      python: 3.6
+    # linux python 3.6 - debug
+    - os: linux
+      env: BUILDTYPE=debug
+      python: 3.6
+    # linux python 3.5
+    - os: linux
+      env: BUILDTYPE=release
+      python: 3.5
+    # linux python 3.5 - debug
+    - os: linux
+      env: BUILDTYPE=debug
+      python: 3.5
+    # linux python 2.7
+    - os: linux
+      env: BUILDTYPE=release
+      python: 2.7
+    # linux python 2.7 - debug
+    - os: linux
+      env: BUILDTYPE=debug
+      python: 2.7
+    # osx python 3.7
+    - os: osx
+      env: BUILDTYPE=release
+      python: 3.7
+    # osx python 3.7 - debug
+    - os: osx
+      env: BUILDTYPE=debug
+      python: 3.7
+    # osx python 3.6
+    - os: osx
+      env: BUILDTYPE=release
+      python: 3.6
+    # osx python 3.6 - debug
+    - os: osx
+      env: BUILDTYPE=debug
+      python: 3.6
+    # osx python 3.5
+    - os: osx
+      env: BUILDTYPE=release
+      python: 3.5
+    # osx python 3.5 - debug
+    - os: osx
+      env: BUILDTYPE=debug
+      python: 3.5
+    # osx python 2.7
+    - os: osx
+      env: BUILDTYPE=release
+      python: 2.7
+    # osx python 2.7 - debug
+    - os: osx
+      env: BUILDTYPE=debug
+      python: 2.7
+    
+    # g++ build (default builds all use clang++)
+    - os: linux
+      env: BUILDTYPE=debug CXX="g++-6" CC="gcc-6" LINK="g++-6" AR="ar" NM="nm"
+      python: 3.7
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - libstdc++-6-dev
+            - g++-6
