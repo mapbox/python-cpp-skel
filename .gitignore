@@ -7,3 +7,4 @@ _build
 _generate
 build
 var
+mason_packages
