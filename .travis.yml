@@ -29,10 +29,15 @@ matrix:
 
     # linux cfi build python 3.7
     - os: linux
-      env: CXXFLAGS="-fsanitize=cfi -fvisibility=hidden" LDFLAGS="-fsanitize=cfi"
+      env: CC="clang" CXX="clang++" CXXFLAGS="-fsanitize=cfi -fvisibility=hidden" LDFLAGS="-fsanitize=cfi"
       python: 3.7
-    # linux python 3.7
+    # linux python 3.7 gcc
     - os: linux
+      env: CC="gcc" CXX="g++"
+      python: 3.7
+    # linux python 3.7 clang
+    - os: linux
+      env: CC="clang" CXX="clang++"
       python: 3.7
     # linux python 3.6
     - os: linux
